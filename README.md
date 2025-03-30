@@ -32,7 +32,7 @@ Fluid-CPlus is a superset of the C programming language that introduces a more f
 
 Fluid-CPlus code is written in `.fluid` files. Here's a simple example:
 
-```plaintext
+```javascript
 module MathUtils {
     func add() {
         let x = 5;
