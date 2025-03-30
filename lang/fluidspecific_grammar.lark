@@ -1,0 +1,49 @@
+
+
+// Define the main entry point
+start: statement+
+
+// Define statements
+statement: func_declaration
+         | import_statement
+         | assignment
+         | if_statement
+         | loop_statement
+         | print_statement
+         | return_statement
+         ;
+
+// Function declaration
+func_declaration: 'func' IDENTIFIER '(' ')' '{' statement* '}'
+
+// Import statement
+import_statement: 'import' STRING_LITERAL ';'
+
+// Assignment
+assignment: 'let' IDENTIFIER '=' expression ';'
+
+// If statement
+if_statement: 'xif' '(' expression ')' '{' statement* '}'
+
+// Loop statement
+loop_statement: 'loop' '(' expression ')' '{' statement* '}'
+
+// Print statement
+print_statement: 'print' '(' STRING_LITERAL ')' ';'
+
+// Return statement
+return_statement: 'Return' expression ';'
+
+// Expressions
+expression: IDENTIFIER
+           | STRING_LITERAL
+           | NUMBER
+           ;
+
+// Define identifiers and literals
+IDENTIFIER: /[a-zA-Z_][a-zA-Z0-9_]*/
+STRING_LITERAL: /"([^"\\]|\\.)*"/
+NUMBER: /\d+/
+
+%import common.WS
+%ignore WS
