@@ -38,7 +38,7 @@ module MathUtils {
         let x = 5;
         let y = 10;
         print("Sum: " + (x + y));
-        return x + y;
+        Return::Result(x + y);
     }
 }
 
