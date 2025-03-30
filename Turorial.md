@@ -73,3 +73,33 @@ GPC Compiler JIT v0.1.1
 ?log: Hello, World!
 exit.
 ```
+you also could just do this instaed of setting up the module:
+```javascript
+#include <FluidLand.h>
+
+func main() {
+    print("Hello, World!")
+    exir
+}
+```
+Now we are going to do some mathematical operations.
+```javascript
+#include <FluidLand.h>
+
+module Math() {
+    let x = 13
+    let y = 23
+    Sum ([x] + [y])
+}
+
+use main
+
+func main() {
+   Math.do()
+   Return::Sum(vars)
+}
+```
+
+which will output:
+`36.00000000001`
+
