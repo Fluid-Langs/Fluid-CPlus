@@ -8,8 +8,10 @@ from pathlib import path
 app = typer.Typer()
 
 @app.command()
-def cc(path):
-    open(path)
-
+def doc():
+    print(`
+    [bold]Fluid-CPlus MiniDocs[/bold]
+    
+    `)
 if __name__ == "__main__":
     app()

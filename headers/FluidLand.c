@@ -118,4 +118,20 @@ typedef struct { float real; float imag; } Complex; // Define a Complex number s
     } \
 } // Reverse a string in place
 
+// Command-line functions
+#define get_command_line_arg(argc, argv, index) (index < argc ? argv[index] : NULL) // Get command line argument
+#define print_command_line_args(argc, argv) { \
+    for (int i = 0; i < argc; i++) { \
+        printf("Argument %d: %s\n", i, argv[i]); \
+    } \
+} // Print all command line arguments
+
+#define read_input(prompt, buffer, size) { \
+    printf("%s", prompt); \
+    fgets(buffer, size, stdin); \
+    buffer[strcspn(buffer, "\n")] = 0; /* Remove newline character */ \
+} // Read input from the user
+
+#define clear_screen() printf("\033[H\033[J") // Clear the console screen
+
 #endif // FLUIDLAND_C

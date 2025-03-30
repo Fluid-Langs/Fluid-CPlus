@@ -1,4 +1,5 @@
-
+%import common.WS
+%ignore WS
 
 // Define the main entry point
 start: statement+
@@ -11,6 +12,8 @@ statement: func_declaration
          | loop_statement
          | print_statement
          | return_statement
+         | module_declaration
+         | module_usage
          ;
 
 // Function declaration
@@ -34,6 +37,12 @@ print_statement: 'print' '(' STRING_LITERAL ')' ';'
 // Return statement
 return_statement: 'Return' expression ';'
 
+// Module declaration
+module_declaration: 'module' IDENTIFIER '{' statement* '}'
+
+// Module usage
+module_usage: 'use' IDENTIFIER ';'
+
 // Expressions
 expression: IDENTIFIER
            | STRING_LITERAL
@@ -44,6 +53,3 @@ expression: IDENTIFIER
 IDENTIFIER: /[a-zA-Z_][a-zA-Z0-9_]*/
 STRING_LITERAL: /"([^"\\]|\\.)*"/
 NUMBER: /\d+/
-
-%import common.WS
-%ignore WS
