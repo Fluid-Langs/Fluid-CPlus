@@ -134,4 +134,6 @@ typedef struct { float real; float imag; } Complex; // Define a Complex number s
 
 #define clear_screen() printf("\033[H\033[J") // Clear the console screen
 
+#define bring(buffer, argc, argv, index) (index < argc ? argv[index] : NULL) 
+
 #endif // FLUIDLAND_C
