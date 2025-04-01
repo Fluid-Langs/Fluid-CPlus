@@ -54,5 +54,12 @@ int parse(fluidParsing *context) {
     //  if (fluidParsing === "")
 }
 
+int macro() {
+    int self;
+    int run;
+
+    void run(fluidParsingHelper *context);
+}
+
 
 #endif // FLUIDNATIVE_H
