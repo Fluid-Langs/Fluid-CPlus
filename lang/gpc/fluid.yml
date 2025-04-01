@@ -1,0 +1,4 @@
+dependencies: []
+description: "The gpc JIT compiler"
+name: gpc
+version: 1.0.0

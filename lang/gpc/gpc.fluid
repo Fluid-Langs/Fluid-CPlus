@@ -1,0 +1,77 @@
+use python
+use clibexterns
+
+{%
+    #include "./headers/alexer.h"
+    #include <FluidLand.h>
+    #include <FluidNative.h>
+
+    typedef enum {
+        PUNCT_PLUS,
+        PUNCT_MULT,
+        PUNCT_EQUALS,
+        PUNCT_OPAREN,
+        PUNCT_CPAREN,
+        PUNCT_OCURLY,
+        PUNCT_CCURLY,
+        PUNCT_SEMICOLON,
+        COUNT_PUNCTS,
+    } Punct_Index;
+
+    static_assert(COUNT_PUNCTS == 8, "Amount of puncts have changed");
+const char *puncts[COUNT_PUNCTS] = {
+    [PUNCT_PLUS]      = "+",
+    [PUNCT_MULT]      = "*",
+    [PUNCT_OPAREN]    = "(",
+    [PUNCT_CPAREN]    = ")",
+    [PUNCT_OCURLY]    = "{",
+    [PUNCT_CCURLY]    = "}",
+    [PUNCT_EQUALS]    = "==",
+    [PUNCT_SEMICOLON] = ";",
+};
+
+typedef enum {
+    KEYWORD_IF,
+    KEYWORD_RETURN,
+    COUNT_KEYWORDS,
+} Keyword_Index;
+
+static_assert(COUNT_KEYWORDS == 2, "Amount of keywords have changed");
+const char *keywords[COUNT_KEYWORDS] = {
+    [KEYWORD_IF]     = "if",
+    [KEYWORD_RETURN] = "return",
+};
+
+const char *sl_comments[] = {
+    "//",
+    "#",
+};
+
+Alexer_ML_Comments ml_comments[] = {
+    {"/*", "*/"},
+};
+
+    int token(Tokenize *context, index, argv, argc);
+    void tokenType(Tokenize *context, token);
+%}
+
+module gpc {
+    func Parse() {
+        let token = {c.f("token")};
+        let tokenType = {c.f("tokenType")};
+
+        define parsingOpts({%
+            #define WORDS void wordList()
+
+            void parse() {
+
+            }
+        %})
+    }
+}
+
+use gpc
+
+func main() {
+    //
+}
