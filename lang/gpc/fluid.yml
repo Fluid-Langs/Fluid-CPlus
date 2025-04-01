@@ -1,4 +1,18 @@
-dependencies: []
+dependencies: [
+  local:
+    alexer:
+      version: unknown
+      path: "./headers/alexer.h"
+    python:
+      version: 3.12
+      path: default
+    gcc:
+      version: 14.2.0
+      path: "/usr/bin/gcc"
+    nob:
+      version: unknown
+      path: "./headers/nob.h"
+]
 description: "The gpc JIT compiler"
 name: gpc
 version: 1.0.0

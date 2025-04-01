@@ -1,10 +1,15 @@
-use python
-use clibexterns
+use std
 
 {%
+    
+    // project headers
     #include "./headers/alexer.h"
+    #include "./headers/nob.h"
+
+    // {fluid.setGlobal::Headers} -:> Start;
     #include <FluidLand.h>
     #include <FluidNative.h>
+    // {fluid.end} <:- End;
 
     typedef enum {
         PUNCT_PLUS,
@@ -39,7 +44,7 @@ typedef enum {
 static_assert(COUNT_KEYWORDS == 2, "Amount of keywords have changed");
 const char *keywords[COUNT_KEYWORDS] = {
     [KEYWORD_IF]     = "if",
-    [KEYWORD_RETURN] = "return",
+    [KEYWORD_RETURN] = "Return",
 };
 
 const char *sl_comments[] = {
@@ -53,6 +58,10 @@ Alexer_ML_Comments ml_comments[] = {
 
     int token(Tokenize *context, index, argv, argc);
     void tokenType(Tokenize *context, token);
+
+    void module() {
+        //
+    }
 %}
 
 module gpc {
@@ -63,15 +72,73 @@ module gpc {
         define parsingOpts({%
             #define WORDS void wordList()
 
-            void parse() {
-
+            void wordList(list *context, index) {
+                #define WORD_FUNC func 
+                #define WORD_PRINT print
+                #define WORD_MODULE module module()
             }
         %})
+
+        {%
+
+            int input;
+
+            void parse() {
+                // parse
+                
+            }
+        %}
+        func jit() {
+            Std::_= Parser(Str[1]==>{?is func(jit) .returner{
+                .var jit = {c.f.header("nob.h")};
+                CModule.init({jit})
+                jit {
+                    CModule.translate("nob.h" >>> "nob.fluidh") then {
+                        extern.createUse*mod(use "nob.fluidh");
+                    }
+                    nob.init();
+                    nob.{c.f{%
+                        // {fluid.newFile()}: self
+
+                        #define NOB_IMPLEMENTATION
+                        #include "./headers/nob.h"
+                        #define BUILD_FOLDER "build/"
+                        #define SRC_FOLDER   "."
+                        void __fluid__({fluid.createExtern(file, self{
+                            as ({file}):
+                                int __fluid__::fileVar();
+                                return 1;
+                            as ({jitSrc}):
+                                int __fluid__::jitSrcVar();
+                                return 1;
+                            end();
+                        })})
+                        int main(int argc, char **argv)
+                        {
+                            NOB_GO_REBUILD_URSELF(argc, argv);
+                            if (!nob_mkdir_if_not_exists(BUILD_FOLDER)) return 1;
+                            Nob_Cmd cmd = {0};
+                            nob_cmd_append(&cmd, "cc", "-Wall", "-Wextra", "-I/usr/include/Fluid", "-o", BUILD_FOLDER"{__fluid__::fileVar}", SRC_FOLDER"__fluid__::jitSrcVar");
+                            if (!nob_cmd_run_sync_and_reset(&cmd)) return 1;
+
+                            return 0;
+                            // {fluid.set} -:> Return::NobH;
+                        }
+
+                        void __fluid__::Global() {
+                            // {fluid.createInterup} => self:
+                                // {}: fluid.create Input as *input;
+                            return __fluid__::Run();
+                        }
+                    %}} 
+                }
+            }})
+        }
     }
 }
 
 use gpc
+use gpc::Global(void)
 
-func main() {
-    //
-}
+gpc.parse(input)
+Return::Result()
